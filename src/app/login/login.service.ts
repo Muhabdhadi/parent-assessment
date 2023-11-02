@@ -11,8 +11,12 @@ import {LoginInterface} from "./interface/login.interface";
 })
 export class LoginService {
     reqresBaseUrl = environment.reqres;
-    user$: Subject<User> = new Subject();
+    private user$: Subject<User> = new Subject();
     constructor(private http: HttpClient) {}
+
+    get user(): Observable<User> {
+        return this.user$.asObservable();
+    }
 
     login(loginPayload: LoginInterface): Observable<LoginResponseInterface> {
         return this.http.post<LoginResponseInterface>(`${this.reqresBaseUrl}login`, loginPayload)
