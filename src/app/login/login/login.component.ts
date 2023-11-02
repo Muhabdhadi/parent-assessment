@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {LoginService} from "../login.service";
 import {Router} from "@angular/router";
+import {ToasterService} from "../../shared/toasts/toaster.service";
 
 @Component({
     selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent {
 
     constructor(private fb: FormBuilder,
                 private router: Router,
+                private toasterService: ToasterService,
                 private loginService: LoginService) {
     }
 
@@ -40,8 +42,9 @@ export class LoginComponent {
                     this.isLoading = false;
                 },
 
-                error: () => {
+                error: (err) => {
                     this.isLoading = false;
+                    this.toasterService.show(err.error.error, {className: 'bg-danger text-light'})
                 }
             })
     }
