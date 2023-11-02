@@ -39,6 +39,7 @@
     }
 
     &-btn {
+        cursor: pointer;
         background: #8E44AD;
         border: none;
         color: #FFFFFF;
@@ -46,6 +47,10 @@
         box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
         padding: 9px 19px;
         border-radius: 20px;
+
+        &:disabled {
+            background: #7F8C8D;
+        }
 
     }
 }
