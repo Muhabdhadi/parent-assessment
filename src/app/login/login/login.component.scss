@@ -1,0 +1,69 @@
+.login {
+
+    &-card {
+        display: flex;
+        flex-direction: row;
+        width: 767px;
+        margin: 80px auto auto auto;
+        background: #FFFFFF;
+        box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
+        border-radius: 10px;
+    }
+
+    &-title {
+        font-size: 25px;
+        color: #34495E;
+        margin-bottom: 12px;
+    }
+
+    &-desc {
+        font-size: 15px;
+        color: #7F8C8D;
+    }
+
+    &-content {
+        padding-top: 130px;
+        margin-left: 16px;
+    }
+
+    &-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &-forget {
+        cursor: pointer;
+        font-size: 14px;
+        color: #8E44AD;
+    }
+
+    &-btn {
+        background: #8E44AD;
+        border: none;
+        color: #FFFFFF;
+        font-size: 15px;
+        box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
+        padding: 9px 19px;
+        border-radius: 20px;
+
+    }
+}
+
+.form-control {
+    width: 374px;
+    margin-bottom: 16px;
+}
+
+.form-group {
+    > label {
+        font-size: 14px;
+        color: #7F8C8D;
+        margin-bottom: 6px;
+    }
+
+    input::placeholder {
+        color: #7F8C8D;
+        font-size: 15px;
+    }
+}
