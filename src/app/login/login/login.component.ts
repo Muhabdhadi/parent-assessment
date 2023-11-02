@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {LoginService} from "../login.service";
 import {Router} from "@angular/router";
 import {ToasterService} from "../../shared/toasts/toaster.service";
+import {LoginResponseInterface} from "../interface/login-response.interface";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-login',
@@ -37,16 +39,20 @@ export class LoginComponent {
         this.loginService.login(this.loginForm.value)
             .subscribe({
 
-                next: (res) => {
-                    if (res.token) this.router.navigate(['/user'])
-                    this.isLoading = false;
-                },
+                next: (res) => this.handleSuccessLogin(res),
 
-                error: (err) => {
-                    this.isLoading = false;
-                    this.toasterService.show(err.error.error, {className: 'bg-danger text-light'})
-                }
+                error: (err) => this.handleErrorLogin(err)
             })
+    }
+
+    handleSuccessLogin(res: LoginResponseInterface) {
+        if (res.token) this.router.navigate(['/user'])
+        this.isLoading = false;
+    }
+
+    handleErrorLogin(err: HttpErrorResponse) {
+        this.isLoading = false;
+        this.toasterService.show(err.error.error, {className: 'bg-danger text-light'})
     }
 
     validateLoginForm() {
