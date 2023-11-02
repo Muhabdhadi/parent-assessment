@@ -1,17 +1,25 @@
 .user {
     &-container {
         width: 1170px;
+        height: 500px;
+        overflow-y: scroll;
         margin: auto;
         background: 1170px;
         box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
         border-radius: 10px;
+
+        &::-webkit-scrollbar {
+            display: none;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     }
 
     &-top {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 10px 30px 0px 30px;
+        padding: 10px 30px 0 30px;
         > p {
             font-size: 12px;
             color: #7F8C8D;
