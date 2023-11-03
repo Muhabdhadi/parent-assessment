@@ -11,7 +11,7 @@ import {ToasterService} from "../../shared/toasts/toaster.service";
 })
 export class UsersListComponent implements OnInit {
     page = 1;
-    per_page = 5;
+    per_page = 6;
     users: UserInterface[] = []
     totalUsers = 0;
     isLoading = false
