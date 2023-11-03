@@ -77,25 +77,10 @@
                     </div>
                 </div>
 
-                <div *ngIf="isUserDetailsVisible" class="user-card">
-
-                    <div (click)="closeUserDetails()" class="user-card-close">
-                        <img src="assets/images/user-list/icons8-delete_sign.png" alt="close">
-                    </div>
-
-                    <div>
-                        <img class="user-card-avatar" [src]="selectedUser?.avatar" [alt]="selectedUser?.first_name">
-                    </div>
-
-                    <div>
-                        <p class="user-card-name">{{selectedUser?.first_name + ' ' + selectedUser?.last_name}}</p>
-                    </div>
-
-                    <div class="user-card-actions">
-                        <button class="user-card-edit"><img src="assets/images/user-list/icons8-edit%20copy%203.png" alt="edit">Edit</button>
-                        <button class="user-card-delete"> <img src="assets/images/user-list/icons8-delete%20copy%203.png" alt="delete"> Delete</button>
-                    </div>
-                </div>
+                <app-user-details [user]="selectedUser"
+                                  *ngIf="isUserDetailsVisible"
+                                  (close)="onCloseUserDetailsCard()">
+                </app-user-details>
 
             </div>
         </div>

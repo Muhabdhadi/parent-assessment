@@ -54,20 +54,20 @@ export class UsersListComponent implements OnInit {
     }
 
     onGetUserById(user: UserInterface) {
+        this.isUserDetailsVisible = true;
         this.getUserById(user.id);
-    }
-
-    closeUserDetails() {
-        this.isUserDetailsVisible = false;
-        this.selectedUser = null;
     }
 
     getUserById(userId: string | number) {
         this.userService.getUserById(userId).subscribe({
             next: (user) => {
                 this.selectedUser = user.data;
-                this.isUserDetailsVisible = true;
             }
         })
+    }
+
+    onCloseUserDetailsCard() {
+        this.isUserDetailsVisible = false;
+        this.selectedUser = null;
     }
 }
