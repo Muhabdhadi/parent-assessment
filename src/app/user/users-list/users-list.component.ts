@@ -68,7 +68,7 @@ export class UsersListComponent implements OnInit {
 
     deleteUser(userId: string | number) {
         this.userService.deleteUser(userId).subscribe({
-            next: (_) => {
+            next: () => {
                 this.toasterService.show(`User have been deleted successfully`, {className: 'bg-success text-light'});
                 this.removeDeletedUserFormArray(userId);
             },
