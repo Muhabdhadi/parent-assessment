@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../user.service";
-import {UsersResponseInterface} from "./users-response.interface";
+import {UsersListResponseInterface} from "./interfaces/users-list-response.interface";
 import {UserInterface} from "./user.interface";
 import {ToasterService} from "../../shared/toasts/toaster.service";
 
 @Component({
     selector: 'app-user',
-    templateUrl: './user.component.html',
-    styleUrls: ['./user.component.scss']
+    templateUrl: './users-list.component.html',
+    styleUrls: ['./users-list.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UsersListComponent implements OnInit {
     page = 1;
     per_page = 5;
     users: UserInterface[] = []
@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
         });
     }
 
-    handleUsersSuccess(res: UsersResponseInterface) {
+    handleUsersSuccess(res: UsersListResponseInterface) {
         this.totalUsers = res.total;
         this.users.push(...res.data);
         this.isLoading = false;

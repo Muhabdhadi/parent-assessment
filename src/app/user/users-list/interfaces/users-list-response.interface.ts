@@ -1,6 +1,6 @@
-import {UserInterface} from "./user.interface";
+import {UserInterface} from "../user.interface";
 
-export interface UsersResponseInterface {
+export interface UsersListResponseInterface {
     page: number,
     per_page: number,
     total: number,
