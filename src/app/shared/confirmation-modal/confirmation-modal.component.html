@@ -1,0 +1,16 @@
+<div class="modal-body">
+
+   <p class="modal-message"> Are you sure you want to delete </p>
+
+    <p class="modal-name">{{name}}</p>
+
+    <div class="modal-actions">
+        <div (click)="closeModal()">
+            <button class="modal-no">No</button>
+        </div>
+
+        <div (click)="confirmDelete()">
+            <button class="modal-yes">Yes</button>
+        </div>
+    </div>
+</div>

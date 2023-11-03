@@ -1,0 +1,46 @@
+.modal {
+
+    &-body {
+        background: #FFFFFF;
+        border-radius: 10px;
+        text-align: center;
+
+    }
+
+    &-message {
+        font-size: 15px;
+        color: #7F8C8D;
+    }
+
+    &-name {
+        font-size: 15px;
+        color: #34495E;
+    }
+
+    &-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    &-yes {
+        background: #8E44AD;
+        border-radius: 20px;
+        color: #FFFFFF;
+        border: 1px solid #8E44AD;
+        padding: 5px 53px;
+        box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
+
+    }
+
+    &-no {
+        background: #F5F5F5;
+        color: #8E44AD;
+        border-radius: 20px;
+        border: 1px solid #8E44AD;
+        padding: 5px 53px;
+        margin-right: 8px;
+        box-shadow: 1px 1px 4px 0 rgba(0,0,0,0.2);
+
+    }
+}
