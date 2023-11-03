@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Utilities} from "../shared/utilities";
 import {Observable} from "rxjs";
-import {UsersListResponseInterface} from "./users-list/interfaces/users-list-response.interface";
 import {UserResponseInterface} from "./users-list/user-response.interface";
+import {UsersListResponseInterface} from "./users-list/interfaces/users-list-response.interface";
 
 @Injectable({
     providedIn: 'root'
