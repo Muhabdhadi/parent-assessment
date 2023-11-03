@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {UserInterface} from "../users-list/user.interface";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ConfirmationModalComponent} from "../../shared/confirmation-modal/confirmation-modal.component";
 
 @Component({
     selector: 'app-user-details',
@@ -14,7 +12,7 @@ export class UserDetailsComponent {
     @Output() edit: EventEmitter<UserInterface> = new EventEmitter();
     @Output() delete: EventEmitter<UserInterface> = new EventEmitter();
 
-    constructor(private modalService: NgbModal) {
+    constructor() {
     }
     onClose() {
         this.close.emit();

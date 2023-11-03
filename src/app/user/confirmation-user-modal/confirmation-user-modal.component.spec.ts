@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmationModalComponent } from './confirmation-modal.component';
+import { ConfirmationUserModalComponent } from './confirmation-user-modal.component';
 
 describe('ConfirmationModalComponent', () => {
-  let component: ConfirmationModalComponent;
-  let fixture: ComponentFixture<ConfirmationModalComponent>;
+  let component: ConfirmationUserModalComponent;
+  let fixture: ComponentFixture<ConfirmationUserModalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ConfirmationModalComponent]
+      declarations: [ConfirmationUserModalComponent]
     });
-    fixture = TestBed.createComponent(ConfirmationModalComponent);
+    fixture = TestBed.createComponent(ConfirmationUserModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

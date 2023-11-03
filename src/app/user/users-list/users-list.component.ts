@@ -3,7 +3,7 @@ import {UserService} from "../user.service";
 import {UsersListResponseInterface} from "./interfaces/users-list-response.interface";
 import {UserInterface} from "./user.interface";
 import {ToasterService} from "../../shared/toasts/toaster.service";
-import {ConfirmationModalComponent} from "../../shared/confirmation-modal/confirmation-modal.component";
+import {ConfirmationUserModalComponent} from "../confirmation-user-modal/confirmation-user-modal.component";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -95,7 +95,7 @@ export class UsersListComponent implements OnInit {
     }
 
     onDeleteUse(user: UserInterface) {
-        this.confirmationModalRef = this.modalService.open(ConfirmationModalComponent);
+        this.confirmationModalRef = this.modalService.open(ConfirmationUserModalComponent);
         this.confirmationModalRef.componentInstance.name = user.first_name + ' ' + user.last_name
 
         this.confirmationModalRef.componentInstance.confirm.subscribe({

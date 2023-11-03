@@ -2,10 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
     selector: 'app-confirmation-modal',
-    templateUrl: './confirmation-modal.component.html',
-    styleUrls: ['./confirmation-modal.component.scss']
+    templateUrl: './confirmation-user-modal.component.html',
+    styleUrls: ['./confirmation-user-modal.component.scss']
 })
-export class ConfirmationModalComponent {
+export class ConfirmationUserModalComponent {
     @Output() close = new EventEmitter();
     @Output() confirm: EventEmitter<boolean> = new EventEmitter();
     @Input() name = '';
