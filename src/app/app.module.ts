@@ -7,6 +7,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { HttpClientModule } from "@angular/common/http";
 import {NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
 import { ToastsComponent } from './shared/toasts/toasts.component';
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ToastsComponent } from './shared/toasts/toasts.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbToastModule
+    NgbToastModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
