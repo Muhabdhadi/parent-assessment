@@ -15,6 +15,8 @@ export class UserComponent implements OnInit {
     users: UserInterface[] = []
     totalUsers = 0;
     isLoading = false
+    isUserDetailsVisible = false;
+    selectedUser: UserInterface | null = null;
     constructor(private userService: UserService, private toasterService: ToasterService) {
     }
 
@@ -49,5 +51,15 @@ export class UserComponent implements OnInit {
         this.isLoading = true;
         this.page+=1;
         this.getUsers();
+    }
+
+    openUserDetails(user: UserInterface) {
+        this.selectedUser = user;
+        this.isUserDetailsVisible = true;
+    }
+
+    closeUserDetails() {
+        this.isUserDetailsVisible = false;
+        this.selectedUser = null;
     }
 }

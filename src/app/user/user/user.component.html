@@ -25,54 +25,78 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div       infiniteScroll
-                       [infiniteScrollDistance]="2"
-                       [infiniteScrollThrottle]="50"
-                       (scrolled)="onScroll()"
-                       [scrollWindow]="false"
-                       class="user-container">
+            <div class="user-content">
 
-                <div class="user-top">
-                    <p>User</p>
-                    <p>Actions</p>
-                </div>
+                <div       infiniteScroll
+                           [infiniteScrollDistance]="2"
+                           [infiniteScrollThrottle]="50"
+                           (scrolled)="onScroll()"
+                           [scrollWindow]="false"
+                           class="user-container">
 
-                <ul class="user-list">
-                    <li *ngFor="let user of users" class="user-item">
-                        <div class="user-list-left">
-                            <img class="user-avatar" [src]="user.avatar" alt="user_image">
-                            <p class="user-name">{{user.first_name + ' ' + user.last_name}}</p>
-                        </div>
+                    <div class="user-top">
+                        <p>User</p>
+                        <p>Actions</p>
+                    </div>
 
-                        <div class="user-list-right">
-
-                            <div class="user-list-right-edits">
-
-                                <div class="user-icon">
-                                    <img src="assets/images/user-list/icons8-edit.png" alt="edit">
-                                </div>
-
-                                <div class="user-icon">
-                                    <img src="assets/images/user-list/icons8-delete.png" alt="edit">
-                                </div>
-
+                    <ul class="user-list">
+                        <li (click)="openUserDetails(user)" *ngFor="let user of users" class="user-item">
+                            <div class="user-list-left">
+                                <img class="user-avatar" [src]="user.avatar" alt="user_image">
+                                <p class="user-name">{{user.first_name + ' ' + user.last_name}}</p>
                             </div>
 
-                            <div>
-                                <img src="assets/images/user-list/icons8-right_4.png" alt="edit">
+                            <div class="user-list-right">
+
+                                <div class="user-list-right-edits">
+
+                                    <div class="user-icon">
+                                        <img src="assets/images/user-list/icons8-edit.png" alt="edit">
+                                    </div>
+
+                                    <div class="user-icon">
+                                        <img src="assets/images/user-list/icons8-delete.png" alt="edit">
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <img src="assets/images/user-list/icons8-right_4.png" alt="edit">
+                                </div>
                             </div>
+
+                        </li>
+
+                    </ul>
+
+                    <div class="loading-spinner" *ngIf="isLoading">
+                        <p>Loading more users</p>
+                        <div>
+                            <img src="assets/images/user-list/icons8-spinner_frame_1.png" alt="loading">
                         </div>
-
-                    </li>
-
-                </ul>
-
-                <div class="loading-spinner" *ngIf="isLoading">
-                    <p>Loading more users</p>
-                    <div>
-                        <img src="assets/images/user-list/icons8-spinner_frame_1.png" alt="loading">
                     </div>
                 </div>
+
+                <div *ngIf="isUserDetailsVisible" class="user-card">
+
+                    <div (click)="closeUserDetails()" class="user-card-close">
+                        <img src="assets/images/user-list/icons8-delete_sign.png" alt="close">
+                    </div>
+
+                    <div>
+                        <img class="user-card-avatar" [src]="selectedUser?.avatar" [alt]="selectedUser?.first_name">
+                    </div>
+
+                    <div>
+                        <p class="user-card-name">{{selectedUser?.first_name + ' ' + selectedUser?.last_name}}</p>
+                    </div>
+
+                    <div class="user-card-actions">
+                        <button class="user-card-edit"><img src="assets/images/user-list/icons8-edit%20copy%203.png" alt="edit">Edit</button>
+                        <button class="user-card-delete"> <img src="assets/images/user-list/icons8-delete%20copy%203.png" alt="delete"> Delete</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
