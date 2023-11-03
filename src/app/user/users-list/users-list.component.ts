@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../user.service";
 import {UsersListResponseInterface} from "./interfaces/users-list-response.interface";
-import {UserInterface} from "./user.interface";
+import {UserInterface} from "./interfaces/user.interface";
 import {ToasterService} from "../../shared/toasts/toaster.service";
 import {ConfirmationUserModalComponent} from "../confirmation-user-modal/confirmation-user-modal.component";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {UpdateUserComponent} from "../update-user/update-user.component";
-import {UpdateUserInterface} from "../update-user/update-user.interface";
+import {UpdateUserInterface} from "../update-user/interfaces/update-user.interface";
 
 @Component({
     selector: 'app-user',

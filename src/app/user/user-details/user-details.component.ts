@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {UserInterface} from "../users-list/user.interface";
+import {UserInterface} from "../users-list/interfaces/user.interface";
 
 @Component({
     selector: 'app-user-details',

@@ -6,7 +6,7 @@ import {
     Output
 } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {UserInterface} from "../users-list/user.interface";
+import {UserInterface} from "../users-list/interfaces/user.interface";
 
 @Component({
     selector: 'app-update-user',
