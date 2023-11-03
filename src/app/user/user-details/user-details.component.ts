@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {UserInterface} from "../users-list/user.interface";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ConfirmationModalComponent} from "../../shared/confirmation-modal/confirmation-modal.component";
 
 @Component({
     selector: 'app-user-details',
@@ -9,22 +11,24 @@ import {UserInterface} from "../users-list/user.interface";
 export class UserDetailsComponent {
     @Input() user: UserInterface | null = null;
     @Output() close: EventEmitter<void> = new EventEmitter();
-    @Output() edit: EventEmitter<number> = new EventEmitter();
-    @Output() delete: EventEmitter<number> = new EventEmitter();
+    @Output() edit: EventEmitter<UserInterface> = new EventEmitter();
+    @Output() delete: EventEmitter<UserInterface> = new EventEmitter();
 
+    constructor(private modalService: NgbModal) {
+    }
     onClose() {
         this.close.emit();
     }
 
-    onUpdate(userId: number | undefined) {
-        if (userId) {
-            this.edit.emit(userId);
+    onUpdate(user: UserInterface | null) {
+        if (user) {
+            this.edit.emit(user);
         }
     }
 
-    onDelete(userId: number | undefined) {
-        if (userId) {
-            this.delete.emit(userId);
+    onDelete(user: UserInterface | null) {
+        if (user) {
+            this.delete.emit(user);
         }
     }
 }

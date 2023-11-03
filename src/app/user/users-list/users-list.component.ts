@@ -3,6 +3,8 @@ import {UserService} from "../user.service";
 import {UsersListResponseInterface} from "./interfaces/users-list-response.interface";
 import {UserInterface} from "./user.interface";
 import {ToasterService} from "../../shared/toasts/toaster.service";
+import {ConfirmationModalComponent} from "../../shared/confirmation-modal/confirmation-modal.component";
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'app-user',
@@ -17,7 +19,10 @@ export class UsersListComponent implements OnInit {
     isLoading = false
     isUserDetailsVisible = false;
     selectedUser: UserInterface | null = null;
-    constructor(private userService: UserService, private toasterService: ToasterService) {
+    confirmationModalRef!: NgbModalRef;
+    constructor(private userService: UserService,
+                private modalService: NgbModal,
+                private toasterService: ToasterService) {
     }
 
     ngOnInit() {
@@ -70,6 +75,7 @@ export class UsersListComponent implements OnInit {
         this.userService.deleteUser(userId).subscribe({
             next: () => {
                 this.toasterService.show(`User have been deleted successfully`, {className: 'bg-success text-light'});
+                this.confirmationModalRef.close();
                 this.removeDeletedUserFormArray(userId);
             },
             error: () => {
@@ -88,7 +94,21 @@ export class UsersListComponent implements OnInit {
         this.selectedUser = null;
     }
 
-    onDeleteUse(userId: number) {
-        this.deleteUser(userId);
+    onDeleteUse(user: UserInterface) {
+        this.confirmationModalRef = this.modalService.open(ConfirmationModalComponent);
+        this.confirmationModalRef.componentInstance.name = user.first_name + ' ' + user.last_name
+
+        this.confirmationModalRef.componentInstance.confirm.subscribe({
+            next: (isConfirm: boolean) => {
+                if (isConfirm) {
+                    this.deleteUser(user.id);
+                }
+
+                if (!isConfirm) {
+                    this.confirmationModalRef.close();
+                }
+            }
+        });
+
     }
 }
