@@ -10,10 +10,10 @@ import {ToasterService} from "../../shared/toasts/toaster.service";
     styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-    page = 0;
+    page = 1;
     per_page = 5;
     users: UserInterface[] = []
-
+    totalUsers = 0;
     constructor(private userService: UserService, private toasterService: ToasterService) {
     }
 
@@ -31,12 +31,19 @@ export class UserComponent implements OnInit {
     }
 
     handleUsersSuccess(res: UsersResponseInterface) {
-        this.users = res.data;
+        this.totalUsers = res.total;
+        this.users.push(...res.data);
     }
 
     handleUsersError() {
         this.toasterService.show('Error while getting users', {
             className: 'bg-danger text-light'
         });
+    }
+
+    onScroll() {
+        if (this.totalUsers === this.users.length) { return; }
+        this.page+=1;
+        this.getUsers();
     }
 }
