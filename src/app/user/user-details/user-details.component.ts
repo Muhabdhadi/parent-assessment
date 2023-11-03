@@ -8,9 +8,23 @@ import {UserInterface} from "../users-list/user.interface";
 })
 export class UserDetailsComponent {
     @Input() user: UserInterface | null = null;
-    @Output() close: EventEmitter<any> = new EventEmitter();
+    @Output() close: EventEmitter<void> = new EventEmitter();
+    @Output() edit: EventEmitter<number> = new EventEmitter();
+    @Output() delete: EventEmitter<number> = new EventEmitter();
 
     onClose() {
         this.close.emit();
+    }
+
+    onUpdate(userId: number | undefined) {
+        if (userId) {
+            this.edit.emit(userId);
+        }
+    }
+
+    onDelete(userId: number | undefined) {
+        if (userId) {
+            this.delete.emit(userId);
+        }
     }
 }
