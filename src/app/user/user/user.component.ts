@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
     per_page = 5;
     users: UserInterface[] = []
     totalUsers = 0;
+    isLoading = false
     constructor(private userService: UserService, private toasterService: ToasterService) {
     }
 
@@ -26,16 +27,18 @@ export class UserComponent implements OnInit {
             .subscribe({
             next: (res) => this.handleUsersSuccess(res),
 
-            error: () => this.handleUsersError()
+            error: () => this.handleUsersError(),
         });
     }
 
     handleUsersSuccess(res: UsersResponseInterface) {
         this.totalUsers = res.total;
         this.users.push(...res.data);
+        this.isLoading = false;
     }
 
     handleUsersError() {
+        this.isLoading = false;
         this.toasterService.show('Error while getting users', {
             className: 'bg-danger text-light'
         });
@@ -43,6 +46,7 @@ export class UserComponent implements OnInit {
 
     onScroll() {
         if (this.totalUsers === this.users.length) { return; }
+        this.isLoading = true;
         this.page+=1;
         this.getUsers();
     }

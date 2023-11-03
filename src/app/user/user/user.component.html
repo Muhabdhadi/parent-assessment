@@ -43,6 +43,13 @@
                     </li>
 
                 </ul>
+
+                <div class="loading-spinner" *ngIf="isLoading">
+                    <p>Loading more users</p>
+                    <div>
+                        <img src="assets/images/user-list/icons8-spinner_frame_1.png" alt="loading">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
