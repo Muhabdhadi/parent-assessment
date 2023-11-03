@@ -5,6 +5,8 @@ import {Utilities} from "../shared/utilities";
 import {Observable} from "rxjs";
 import {UserResponseInterface} from "./users-list/user-response.interface";
 import {UsersListResponseInterface} from "./users-list/interfaces/users-list-response.interface";
+import {UpdateUserInterface} from "./update-user/update-user.interface";
+import {UpdateUserResponseInterface} from "./update-user/update-user-response.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -26,5 +28,9 @@ export class UserService {
 
     deleteUser(userId: string | number): Observable<any> {
         return this.http.delete(`${this.reqresBaseUrl}users/${userId}`);
+    }
+
+    updateUser(userId: string | number, updateUserPayload: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
+        return this.http.put<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users/${userId}`, updateUserPayload);
     }
 }

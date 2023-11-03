@@ -1,13 +1,20 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output
+} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+import {UserInterface} from "../users-list/user.interface";
 
 @Component({
     selector: 'app-update-user',
     templateUrl: './update-user.component.html',
     styleUrls: ['./update-user.component.scss']
 })
-export class UpdateUserComponent {
-    @Input() avatar = ''
+export class UpdateUserComponent implements  OnInit {
+    @Input() user: UserInterface | null = null;
     @Output() cancel = new EventEmitter();
     @Output() save = new EventEmitter();
 
@@ -16,6 +23,13 @@ export class UpdateUserComponent {
         job: ['', Validators.required]
     })
     constructor(private fb: FormBuilder) {
+    }
+
+    ngOnInit() {
+        if (this.user) {
+            this.updateForm.get('name')?.setValue(this.user?.first_name + ' ' + this.user.last_name);
+            this.updateForm.updateValueAndValidity();
+        }
     }
 
     onCancel() {
@@ -27,7 +41,7 @@ export class UpdateUserComponent {
 
         if (this.updateForm.invalid) { return; }
 
-        this.save.emit();
+        this.save.emit(this.updateForm.value);
     }
 
     validateLoginForm() {

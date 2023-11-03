@@ -6,6 +6,7 @@ import {ToasterService} from "../../shared/toasts/toaster.service";
 import {ConfirmationUserModalComponent} from "../confirmation-user-modal/confirmation-user-modal.component";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {UpdateUserComponent} from "../update-user/update-user.component";
+import {UpdateUserInterface} from "../update-user/update-user.interface";
 
 @Component({
     selector: 'app-user',
@@ -86,6 +87,18 @@ export class UsersListComponent implements OnInit {
         });
     }
 
+    updateUser(userId: string | number, userUpdatePayload: UpdateUserInterface) {
+        this.userService.updateUser(userId, userUpdatePayload).subscribe({
+            next: () => {
+                this.updateUserComponentRef.close();
+                this.toasterService.show('User Updated Successfully', {className: 'bg-success text-light'});
+            },
+            error: () => {
+                this.toasterService.show('Error while Update User',  {className: 'bg-danger text-light'});
+            }
+        })
+    }
+
     removeDeletedUserFormArray(userId: number | string) {
         this.users.splice(this.users.findIndex(user => user.id === userId), 1);
         this.onCloseUserDetailsCard();
@@ -97,7 +110,8 @@ export class UsersListComponent implements OnInit {
     }
 
     onDeleteUse(user: UserInterface) {
-        this.confirmationModalRef = this.modalService.open(ConfirmationUserModalComponent);
+        this.confirmationModalRef = this.modalService.open(ConfirmationUserModalComponent, {centered: true});
+
         this.confirmationModalRef.componentInstance.name = user.first_name + ' ' + user.last_name
 
         this.confirmationModalRef.componentInstance.confirm.subscribe({
@@ -115,18 +129,28 @@ export class UsersListComponent implements OnInit {
     }
 
     onUpdateUser(user?: UserInterface) {
+
         this.updateUserComponentRef = this.modalService.open(UpdateUserComponent, {size: 'md', centered: true, modalDialogClass: 'modal-update'});
 
-        this.updateUserComponentRef.componentInstance.avatar = user?.avatar;
+        this.updateUserComponentRef.componentInstance.user = user;
+
 
         this.updateUserComponentRef.componentInstance.cancel.subscribe({
-            next: () => {
-                this.updateUserComponentRef.close();
-            }
+            next: () => this.handleCancelUpdateUserModal()
         });
 
         this.updateUserComponentRef.componentInstance.save.subscribe({
-            next: () => {}
+            next: (updatedUserInfo: any) => this.handleUpdateUser(user, updatedUserInfo)
         })
+    }
+
+    handleCancelUpdateUserModal() {
+        this.updateUserComponentRef.close();
+    }
+
+    handleUpdateUser(user: UserInterface | undefined, userUpdatedInfo: UpdateUserInterface) {
+        if (user) {
+            this.updateUser(user?.id, userUpdatedInfo);
+        }
     }
 }
