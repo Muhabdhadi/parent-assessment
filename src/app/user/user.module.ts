@@ -5,12 +5,14 @@ import {CommonModule} from "@angular/common";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {UserDetailsComponent} from "./user-details/user-details.component";
 import {ConfirmationUserModalComponent} from "./confirmation-user-modal/confirmation-user-modal.component";
+import {UpdateUserComponent} from "./update-user/update-user.component";
 
 @NgModule({
     declarations: [
         UsersListComponent,
         UserDetailsComponent,
-        ConfirmationUserModalComponent
+        ConfirmationUserModalComponent,
+        UpdateUserComponent
     ],
     imports: [
         CommonModule,

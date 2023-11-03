@@ -5,6 +5,7 @@ import {UserInterface} from "./user.interface";
 import {ToasterService} from "../../shared/toasts/toaster.service";
 import {ConfirmationUserModalComponent} from "../confirmation-user-modal/confirmation-user-modal.component";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateUserComponent} from "../update-user/update-user.component";
 
 @Component({
     selector: 'app-user',
@@ -110,5 +111,10 @@ export class UsersListComponent implements OnInit {
             }
         });
 
+    }
+
+    onUpdateUser(user?: UserInterface) {
+        const updateUserComponentRef = this.modalService.open(UpdateUserComponent, {size: 'md', centered: true, modalDialogClass: 'modal-update'});
+        updateUserComponentRef.componentInstance.avatar = user?.avatar;
     }
 }
