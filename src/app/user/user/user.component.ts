@@ -53,13 +53,21 @@ export class UserComponent implements OnInit {
         this.getUsers();
     }
 
-    openUserDetails(user: UserInterface) {
-        this.selectedUser = user;
-        this.isUserDetailsVisible = true;
+    onGetUserById(user: UserInterface) {
+        this.getUserById(user.id);
     }
 
     closeUserDetails() {
         this.isUserDetailsVisible = false;
         this.selectedUser = null;
+    }
+
+    getUserById(userId: string | number) {
+        this.userService.getUserById(userId).subscribe({
+            next: (user) => {
+                this.selectedUser = user.data;
+                this.isUserDetailsVisible = true;
+            }
+        })
     }
 }
