@@ -21,6 +21,7 @@ export class UsersListComponent implements OnInit {
     isUserDetailsVisible = false;
     selectedUser: UserInterface | null = null;
     confirmationModalRef!: NgbModalRef;
+    updateUserComponentRef!: NgbModalRef;
     constructor(private userService: UserService,
                 private modalService: NgbModal,
                 private toasterService: ToasterService) {
@@ -114,7 +115,18 @@ export class UsersListComponent implements OnInit {
     }
 
     onUpdateUser(user?: UserInterface) {
-        const updateUserComponentRef = this.modalService.open(UpdateUserComponent, {size: 'md', centered: true, modalDialogClass: 'modal-update'});
-        updateUserComponentRef.componentInstance.avatar = user?.avatar;
+        this.updateUserComponentRef = this.modalService.open(UpdateUserComponent, {size: 'md', centered: true, modalDialogClass: 'modal-update'});
+
+        this.updateUserComponentRef.componentInstance.avatar = user?.avatar;
+
+        this.updateUserComponentRef.componentInstance.cancel.subscribe({
+            next: () => {
+                this.updateUserComponentRef.close();
+            }
+        });
+
+        this.updateUserComponentRef.componentInstance.save.subscribe({
+            next: () => {}
+        })
     }
 }

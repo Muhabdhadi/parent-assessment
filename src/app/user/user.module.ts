@@ -6,6 +6,7 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {UserDetailsComponent} from "./user-details/user-details.component";
 import {ConfirmationUserModalComponent} from "./confirmation-user-modal/confirmation-user-modal.component";
 import {UpdateUserComponent} from "./update-user/update-user.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import {UpdateUserComponent} from "./update-user/update-user.component";
     imports: [
         CommonModule,
         UserRoutingModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        ReactiveFormsModule
     ]
 })
 export class UserModule {
