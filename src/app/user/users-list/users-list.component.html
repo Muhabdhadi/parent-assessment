@@ -79,6 +79,7 @@
 
                 <app-user-details [user]="selectedUser"
                                   *ngIf="isUserDetailsVisible"
+                                  (delete)="onDeleteUse($event)"
                                   (close)="onCloseUserDetailsCard()">
                 </app-user-details>
 

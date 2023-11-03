@@ -23,4 +23,8 @@ export class UserService {
     getUserById(userId: string | number): Observable<UserResponseInterface> {
         return this.http.get<UserResponseInterface>(`${this.reqresBaseUrl}users/${userId}`);
     }
+
+    deleteUser(userId: string | number): Observable<any> {
+        return this.http.delete(`${this.reqresBaseUrl}users/${userId}`);
+    }
 }

@@ -66,8 +66,29 @@ export class UsersListComponent implements OnInit {
         })
     }
 
+    deleteUser(userId: string | number) {
+        this.userService.deleteUser(userId).subscribe({
+            next: (res) => {
+                this.toasterService.show(`User have been deleted successfully`, {className: 'bg-success text-light'});
+                this.removeDeletedUserFormArray(userId);
+            },
+            error: () => {
+                this.toasterService.show(`Error while deleting the user`, {className: 'bg-danger text-light'})
+            }
+        });
+    }
+
+    removeDeletedUserFormArray(userId: number | string) {
+        this.users.splice(this.users.findIndex(user => user.id === userId), 1);
+        this.onCloseUserDetailsCard();
+    }
+
     onCloseUserDetailsCard() {
         this.isUserDetailsVisible = false;
         this.selectedUser = null;
+    }
+
+    onDeleteUse(userId: number) {
+        this.deleteUser(userId);
     }
 }
