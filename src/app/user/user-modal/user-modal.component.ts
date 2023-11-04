@@ -7,6 +7,9 @@ import {
 } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {UserInterface} from "../users-list/interfaces/user.interface";
+import {UserModalService} from "./user-modal.service";
+import {UpdateUserInterface} from "./interfaces/update-user.interface";
+import {ToasterService} from "../../shared/toasts/toaster.service";
 
 @Component({
     selector: 'app-update-user',
@@ -16,14 +19,14 @@ import {UserInterface} from "../users-list/interfaces/user.interface";
 export class UserModalComponent implements  OnInit {
     @Input() user: UserInterface | null = null;
     @Output() cancel = new EventEmitter();
-    @Output() save = new EventEmitter();
-    @Output() newUser = new EventEmitter();
 
     updateForm = this.fb.group({
         name: ['', Validators.required],
         job: ['', Validators.required]
-    })
-    constructor(private fb: FormBuilder) {
+    });
+    constructor(private fb: FormBuilder,
+                private userModalService: UserModalService,
+                private toasterService: ToasterService) {
     }
 
     ngOnInit() {
@@ -42,7 +45,8 @@ export class UserModalComponent implements  OnInit {
 
         if (this.updateForm.invalid) { return; }
 
-        this.save.emit(this.updateForm.value);
+        // @ts-ignore
+        this.updateUser(this.user?.id, this.updateForm.value);
     }
 
     validateLoginForm() {
@@ -59,6 +63,18 @@ export class UserModalComponent implements  OnInit {
 
         if (this.updateForm.invalid) { return; }
 
-        this.newUser.emit(this.updateForm.value);
+        // this.newUser.emit(this.updateForm.value);
+    }
+
+    updateUser(userId: string | number, userUpdatePayload: UpdateUserInterface) {
+        this.userModalService.updateUser(userId, userUpdatePayload).subscribe({
+            next: () => {
+                this.userModalService.updatedUser = userUpdatePayload;
+                this.toasterService.show('User Updated Successfully', {className: 'bg-success text-light'});
+            },
+            error: () => {
+                this.toasterService.show('Error while Update User',  {className: 'bg-danger text-light'});
+            }
+        })
     }
 }

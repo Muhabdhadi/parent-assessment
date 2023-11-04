@@ -30,10 +30,6 @@ export class UserService {
         return this.http.delete(`${this.reqresBaseUrl}users/${userId}`);
     }
 
-    updateUser(userId: string | number, updateUserPayload: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
-        return this.http.put<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users/${userId}`, updateUserPayload);
-    }
-
     createUser(user: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
         return this.http.post<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users`, user);
     }
