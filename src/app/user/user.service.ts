@@ -26,10 +26,6 @@ export class UserService {
         return this.http.get<UserResponseInterface>(`${this.reqresBaseUrl}users/${userId}`);
     }
 
-    deleteUser(userId: string | number): Observable<any> {
-        return this.http.delete(`${this.reqresBaseUrl}users/${userId}`);
-    }
-
     createUser(user: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
         return this.http.post<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users`, user);
     }

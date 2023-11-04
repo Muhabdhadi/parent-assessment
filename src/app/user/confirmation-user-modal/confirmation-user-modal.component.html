@@ -2,7 +2,7 @@
 
    <p class="modal-message"> Are you sure you want to delete </p>
 
-    <p class="modal-name">{{name}}</p>
+    <p class="modal-name">{{user?.first_name + ' ' + user?.last_name}}</p>
 
     <div class="modal-actions">
         <div (click)="closeModal()">
