@@ -153,4 +153,8 @@ export class UsersListComponent implements OnInit {
             this.updateUser(user?.id, userUpdatedInfo);
         }
     }
+
+    openAddNewUserModal() {
+        this.modalService.open(UpdateUserComponent, { centered: true });
+    }
 }

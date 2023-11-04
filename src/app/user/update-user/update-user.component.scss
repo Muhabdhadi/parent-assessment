@@ -42,6 +42,23 @@
         top: -64px;
         left: 111px;
 
+        &--new {
+            width: 106px;
+            height: 106px;
+            display: flex;
+            position: absolute;
+            top: -53px;
+            border: 1px solid #FFFFFF;
+            border-radius: 50%;
+            text-align: center;
+            left: 126px;
+            background: #7F8C8D;
+
+            > img {
+                margin: auto;
+            }
+        }
+
         > img {
             border: 3px solid #FFFFFF;
             border-radius: 50%;

@@ -17,6 +17,7 @@ export class UpdateUserComponent implements  OnInit {
     @Input() user: UserInterface | null = null;
     @Output() cancel = new EventEmitter();
     @Output() save = new EventEmitter();
+    @Output() newUser = new EventEmitter();
 
     updateForm = this.fb.group({
         name: ['', Validators.required],
@@ -51,5 +52,13 @@ export class UpdateUserComponent implements  OnInit {
                 control.updateValueAndValidity({ onlySelf: true });
             }
         });
+    }
+
+    onAddNewUser() {
+        this.validateLoginForm();
+
+        if (this.updateForm.invalid) { return; }
+
+        this.newUser.emit(this.updateForm.value);
     }
 }

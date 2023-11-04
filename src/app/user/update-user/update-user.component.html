@@ -1,7 +1,11 @@
 <div class="update-modal">
 
-    <div class="update-modal-avatar">
+    <div *ngIf="user?.avatar" class="update-modal-avatar">
         <img [src]="user?.avatar" alt="avatar">
+    </div>
+
+    <div *ngIf="!user" class="update-modal-avatar--new">
+        <img src="assets/images/user-modal/icons8-user.png" alt="avatar">
     </div>
 
     <form [formGroup]="updateForm">
@@ -30,7 +34,10 @@
         <div class="update-modal-actions">
             <button (click)="onCancel()" class="cancel">Cancel</button>
 
-            <button (click)="onSave()" class="save">Save</button>
+            <button *ngIf="user" (click)="onSave()" class="save">Save</button>
+
+            <button *ngIf="!user" (click)="onAddNewUser()" class="save">Add</button>
+
 
         </div>
     </form>
