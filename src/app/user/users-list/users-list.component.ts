@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UsersListService} from "./users-list.service";
 import {UsersListResponseInterface} from "./interfaces/users-list-response.interface";
 import {UserInterface} from "./interfaces/user.interface";
@@ -8,13 +8,14 @@ import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {UserModalService} from "../user-modal/user-modal.service";
 import {ConfirmationUserModalService} from "../confirmation-user-modal/confirmation-user-modal.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-user',
     templateUrl: './users-list.component.html',
     styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, OnDestroy {
     page = 1;
     per_page = 6;
     users: UserInterface[] = []
@@ -24,6 +25,9 @@ export class UsersListComponent implements OnInit {
     selectedUser: UserInterface | null = null;
     confirmationModalRef!: NgbModalRef;
     userModalComponentRef!: NgbModalRef;
+    newUserSubscription!: Subscription;
+    deletedUserSubscription!: Subscription;
+    updatedUserSubscription!: Subscription;
     constructor(private userService: UsersListService,
                 private modalService: NgbModal,
                 private userModalService: UserModalService,
@@ -34,23 +38,29 @@ export class UsersListComponent implements OnInit {
     ngOnInit() {
         this.getUsers();
 
-        this.userModalService.updatedUser.subscribe({
+        this.updatedUserSubscription = this.userModalService.updatedUser.subscribe({
             next: (updatedUser) => {
                 this.userModalComponentRef.close();
             }
         });
 
-        this.userConfirmationModal.deletedUser.subscribe({
+        this.deletedUserSubscription = this.userConfirmationModal.deletedUser.subscribe({
             next: (user: UserInterface) => {
                 this.removeDeletedUserFormArray(user.id);
             }
         });
 
-        this.userModalService.newUser.subscribe({
+        this.newUserSubscription = this.userModalService.newUser.subscribe({
             next: (user) => {
                 this.userModalComponentRef.close();
             }
         })
+    }
+
+    ngOnDestroy() {
+        this.newUserSubscription.unsubscribe();
+        this.deletedUserSubscription.unsubscribe();
+        this.updatedUserSubscription.unsubscribe();
     }
 
     getUsers() {
