@@ -4,8 +4,6 @@ import {environment} from "../../environments/environment";
 import {Utilities} from "../shared/utilities";
 import {Observable} from "rxjs";
 import {UsersListResponseInterface} from "./users-list/interfaces/users-list-response.interface";
-import {UpdateUserInterface} from "./user-modal/interfaces/update-user.interface";
-import {UpdateUserResponseInterface} from "./user-modal/interfaces/update-user-response.interface";
 
 @Injectable({
     providedIn: 'root'

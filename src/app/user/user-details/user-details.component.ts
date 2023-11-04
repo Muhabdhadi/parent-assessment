@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {UserInterface} from "../users-list/interfaces/user.interface";
 import {UserDetailsService} from "./user-details.service";
 

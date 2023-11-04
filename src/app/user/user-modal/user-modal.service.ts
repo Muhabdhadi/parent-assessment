@@ -19,7 +19,7 @@ import {environment} from "../../../environments/environment";
         this.updatedUser$.next(user);
     }
     
-    get updatedUser(): Observable<any> {
+    get updatedUser(): Observable<UpdateUserInterface> {
         return this.updatedUser$.asObservable();
     }
 
