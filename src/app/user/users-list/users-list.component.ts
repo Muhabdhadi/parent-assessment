@@ -51,7 +51,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
         });
 
         this.newUserSubscription = this.userModalService.newUser.subscribe({
-            next: (user) => {
+            next: (_) => {
                 this.userModalComponentRef.close();
             }
         })
