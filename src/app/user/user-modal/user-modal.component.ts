@@ -10,10 +10,10 @@ import {UserInterface} from "../users-list/interfaces/user.interface";
 
 @Component({
     selector: 'app-update-user',
-    templateUrl: './update-user.component.html',
-    styleUrls: ['./update-user.component.scss']
+    templateUrl: './user-modal.component.html',
+    styleUrls: ['./user-modal.component.scss']
 })
-export class UpdateUserComponent implements  OnInit {
+export class UserModalComponent implements  OnInit {
     @Input() user: UserInterface | null = null;
     @Output() cancel = new EventEmitter();
     @Output() save = new EventEmitter();

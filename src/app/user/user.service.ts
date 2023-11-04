@@ -5,8 +5,8 @@ import {Utilities} from "../shared/utilities";
 import {Observable} from "rxjs";
 import {UserResponseInterface} from "./users-list/interfaces/user-response.interface";
 import {UsersListResponseInterface} from "./users-list/interfaces/users-list-response.interface";
-import {UpdateUserInterface} from "./update-user/interfaces/update-user.interface";
-import {UpdateUserResponseInterface} from "./update-user/interfaces/update-user-response.interface";
+import {UpdateUserInterface} from "./user-modal/interfaces/update-user.interface";
+import {UpdateUserResponseInterface} from "./user-modal/interfaces/update-user-response.interface";
 
 @Injectable({
     providedIn: 'root'

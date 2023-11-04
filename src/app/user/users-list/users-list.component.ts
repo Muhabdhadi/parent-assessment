@@ -5,8 +5,8 @@ import {UserInterface} from "./interfaces/user.interface";
 import {ToasterService} from "../../shared/toasts/toaster.service";
 import {ConfirmationUserModalComponent} from "../confirmation-user-modal/confirmation-user-modal.component";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {UpdateUserComponent} from "../update-user/update-user.component";
-import {UpdateUserInterface} from "../update-user/interfaces/update-user.interface";
+import {UserModalComponent} from "../user-modal/user-modal.component";
+import {UpdateUserInterface} from "../user-modal/interfaces/update-user.interface";
 
 @Component({
     selector: 'app-user',
@@ -130,7 +130,7 @@ export class UsersListComponent implements OnInit {
 
     onUpdateUser(user?: UserInterface) {
 
-        this.updateUserComponentRef = this.modalService.open(UpdateUserComponent, {size: 'md', centered: true, modalDialogClass: 'modal-update'});
+        this.updateUserComponentRef = this.modalService.open(UserModalComponent, {size: 'md', centered: true, modalDialogClass: 'modal-update'});
 
         this.updateUserComponentRef.componentInstance.user = user;
 
@@ -155,6 +155,6 @@ export class UsersListComponent implements OnInit {
     }
 
     openAddNewUserModal() {
-        this.modalService.open(UpdateUserComponent, { centered: true });
+        this.modalService.open(UserModalComponent, { centered: true });
     }
 }
