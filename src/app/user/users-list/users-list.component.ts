@@ -78,15 +78,7 @@ export class UsersListComponent implements OnInit {
 
     onGetUserById(user: UserInterface) {
         this.isUserDetailsVisible = true;
-        this.getUserById(user.id);
-    }
-
-    getUserById(userId: string | number) {
-        this.userService.getUserById(userId).subscribe({
-            next: (user) => {
-                this.selectedUser = user.data;
-            }
-        })
+        this.selectedUser = user;
     }
 
     removeDeletedUserFormArray(userId: number | string) {

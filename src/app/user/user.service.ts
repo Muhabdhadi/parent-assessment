@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Utilities} from "../shared/utilities";
 import {Observable} from "rxjs";
-import {UserResponseInterface} from "./users-list/interfaces/user-response.interface";
 import {UsersListResponseInterface} from "./users-list/interfaces/users-list-response.interface";
 import {UpdateUserInterface} from "./user-modal/interfaces/update-user.interface";
 import {UpdateUserResponseInterface} from "./user-modal/interfaces/update-user-response.interface";
@@ -21,11 +20,6 @@ export class UserService {
             params: param
         });
     }
-
-    getUserById(userId: string | number): Observable<UserResponseInterface> {
-        return this.http.get<UserResponseInterface>(`${this.reqresBaseUrl}users/${userId}`);
-    }
-
     createUser(user: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
         return this.http.post<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users`, user);
     }
