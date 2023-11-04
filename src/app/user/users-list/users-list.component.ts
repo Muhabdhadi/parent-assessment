@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../user.service";
+import {UsersListService} from "./users-list.service";
 import {UsersListResponseInterface} from "./interfaces/users-list-response.interface";
 import {UserInterface} from "./interfaces/user.interface";
 import {ToasterService} from "../../shared/toasts/toaster.service";
@@ -24,7 +24,7 @@ export class UsersListComponent implements OnInit {
     selectedUser: UserInterface | null = null;
     confirmationModalRef!: NgbModalRef;
     userModalComponentRef!: NgbModalRef;
-    constructor(private userService: UserService,
+    constructor(private userService: UsersListService,
                 private modalService: NgbModal,
                 private userModalService: UserModalService,
                 private userConfirmationModal: ConfirmationUserModalService,
