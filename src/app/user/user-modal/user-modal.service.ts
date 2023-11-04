@@ -10,7 +10,9 @@ import {environment} from "../../../environments/environment";
 })
  export class UserModalService {
     reqresBaseUrl = environment.reqres;
-    private updatedUser$ = new Subject();
+    private updatedUser$: Subject<UpdateUserInterface> = new Subject();
+
+    private newUser$: Subject<UpdateUserInterface> = new Subject();
     constructor(private http: HttpClient) {}
     
     set updatedUser(user: UpdateUserInterface) {
@@ -21,8 +23,20 @@ import {environment} from "../../../environments/environment";
         return this.updatedUser$.asObservable();
     }
 
+    set newUser(user: UpdateUserInterface) {
+        this.newUser$.next(user);
+    }
+
+    get newUser(): Observable<UpdateUserInterface> {
+        return this.newUser$.asObservable();
+    }
+
     updateUser(userId: string | number, updateUserPayload: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
         return this.http.put<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users/${userId}`, updateUserPayload);
+    }
+
+    createUser(user: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
+        return this.http.post<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users`, user);
     }
 
 }

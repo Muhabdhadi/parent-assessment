@@ -44,6 +44,12 @@ export class UsersListComponent implements OnInit {
             next: (user: UserInterface) => {
                 this.removeDeletedUserFormArray(user.id);
             }
+        });
+
+        this.userModalService.newUser.subscribe({
+            next: (user) => {
+                this.userModalComponentRef.close();
+            }
         })
     }
 
@@ -105,7 +111,12 @@ export class UsersListComponent implements OnInit {
     }
 
     openAddNewUserModal() {
-        this.modalService.open(UserModalComponent, { centered: true });
+        this.userModalComponentRef = this.modalService.open(UserModalComponent, { centered: true });
+        this.userModalComponentRef.componentInstance.cancel.subscribe({
+            next: () => {
+                this.userModalComponentRef.close();
+            }
+        })
     }
 
     onUpdateUser(user: UserInterface) {

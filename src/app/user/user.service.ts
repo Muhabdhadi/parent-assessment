@@ -20,7 +20,5 @@ export class UserService {
             params: param
         });
     }
-    createUser(user: UpdateUserInterface): Observable<UpdateUserResponseInterface> {
-        return this.http.post<UpdateUserResponseInterface>(`${this.reqresBaseUrl}users`, user);
-    }
+
 }

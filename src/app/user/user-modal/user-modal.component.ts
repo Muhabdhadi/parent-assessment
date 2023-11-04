@@ -63,17 +63,33 @@ export class UserModalComponent implements  OnInit {
 
         if (this.updateForm.invalid) { return; }
 
-        // this.newUser.emit(this.updateForm.value);
+        // @ts-ignore
+        this.createNewUser(this.updateForm.value);
+
     }
 
     updateUser(userId: string | number, userUpdatePayload: UpdateUserInterface) {
         this.userModalService.updateUser(userId, userUpdatePayload).subscribe({
             next: () => {
                 this.userModalService.updatedUser = userUpdatePayload;
+
                 this.toasterService.show('User Updated Successfully', {className: 'bg-success text-light'});
             },
             error: () => {
                 this.toasterService.show('Error while Update User',  {className: 'bg-danger text-light'});
+            }
+        })
+    }
+
+    createNewUser(user: UpdateUserInterface) {
+
+        this.userModalService.createUser(user).subscribe({
+            next: () => {
+                this.userModalService.newUser = user;
+                this.toasterService.show(`${user.name} User created successfully`, {className: 'bg-success text-light'});
+            },
+            error: () => {
+                this.toasterService.show(`Error while creating ${this.updateForm.get('name')?.value} user`,  {className: 'bg-danger text-light'});
             }
         })
     }
