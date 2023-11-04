@@ -8,8 +8,12 @@
             <li><a routerLink="/user">HOME</a></li>
             <li><a>ABOUT</a></li>
             <li><a>CONTACT</a></li>
-            <li>
+            <li *ngIf="!isAuth">
                 <a routerLink="/login" class="login-btn">LOGIN</a>
+            </li>
+
+            <li (click)="logout()" *ngIf="isAuth">
+                <a class="login-btn">LOGOUT</a>
             </li>
         </ul>
     </div>
